@@ -46,7 +46,8 @@ function TodoList() {
     
   )
 }
-*/
+
+
 
 function Button(props){
   const buttonStyle = {
@@ -59,12 +60,40 @@ function Button(props){
   )
 }
 
-export default function App(){
+*/
+
+import React, { useState } from "react";
+import "./App.css";
+
+const COLORS = ["pink", "green", "blue", "yellow", "purple"];
+
+function App() {
+  const [backgroundColor, setBackgroundColor] = useState(COLORS[0]);
+
+  const onButtonClick = (color) => () => {
+    setBackgroundColor(color);
+  };
+
   return (
-    <div>
-      <Button text="Click me!"  color="blue" fontSize={12} />
-      <Button text="dont click me" color="red" fontSize={14}  />
-      <Button text="click me" color="green"  fontSize={20} />
+    <div
+      className="App"
+      style={{
+        backgroundColor,
+      }}
+    >
+      {COLORS.map((color) => (
+        <button
+          type="button"
+          key={color}
+          onClick={onButtonClick(color)}
+          className={backgroundColor === color ? "selected" : ""}
+        >
+          {color}
+        </button>
+      ))}
     </div>
-  )
+  );
 }
+
+export default App;
+
